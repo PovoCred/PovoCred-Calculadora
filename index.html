@@ -6,68 +6,92 @@
     <title>Calculadora de Empréstimo</title>
     <style>
         body {
-            font-family: Arial, sans-serif;
-            background-color: #f7f7f7;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f4f7fa;
+            color: #333;
+            text-align: center;
             margin: 0;
             padding: 0;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            flex-direction: column;
         }
+
         h1 {
-            color: #4CAF50;
-            font-size: 36px;
-            margin-bottom: 20px;
+            font-size: 2.5em;
+            margin: 30px;
+            color: #2d6a4f;
         }
+
         form {
             background-color: #ffffff;
+            border-radius: 10px;
             padding: 30px;
-            border-radius: 8px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-            width: 100%;
-            max-width: 400px;
-            text-align: left;
+            width: 80%;
+            max-width: 600px;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+            margin: 0 auto;
         }
+
         label {
-            font-size: 16px;
-            color: #333;
-            margin-bottom: 5px;
+            font-size: 1.2em;
+            margin: 10px 0;
             display: block;
         }
-        input, button {
+
+        input[type="text"], input[type="number"] {
+            font-size: 1em;
+            padding: 12px;
             width: 100%;
-            padding: 15px;
-            margin: 10px 0;
+            border: 2px solid #ddd;
             border-radius: 5px;
-            border: 1px solid #ddd;
-            font-size: 16px;
+            margin: 10px 0;
+            box-sizing: border-box;
+            transition: border-color 0.3s ease;
         }
-        input:focus, button:focus {
+
+        input[type="text"]:focus, input[type="number"]:focus {
+            border-color: #2d6a4f;
             outline: none;
-            border-color: #4CAF50;
         }
+
         button {
-            background-color: #4CAF50;
-            color: white;
+            background-color: #2d6a4f;
+            color: #fff;
             border: none;
+            padding: 15px 30px;
+            font-size: 1.2em;
+            border-radius: 5px;
             cursor: pointer;
-            font-weight: bold;
-            font-size: 18px;
+            transition: background-color 0.3s ease;
         }
-        button:disabled {
-            background-color: #ccc;
-            cursor: not-allowed;
+
+        button:hover {
+            background-color: #218c47;
         }
+
         h2 {
+            font-size: 1.5em;
             color: #333;
-            font-size: 20px;
             margin-top: 20px;
         }
+
         .erro {
             color: red;
-            font-size: 14px;
+            font-size: 1.2em;
+        }
+
+        .sucesso {
+            color: #2d6a4f;
+            font-size: 1.5em;
+            font-weight: bold;
+        }
+
+        footer {
+            position: absolute;
+            bottom: 0;
+            width: 100%;
+            text-align: center;
+            padding: 10px;
+            background-color: #2d6a4f;
+            color: white;
         }
     </style>
 </head>
@@ -78,12 +102,16 @@
         <input type="text" id="valor" required oninput="formatarMoeda(this)" inputmode="decimal">
         
         <label for="parcelas">Número de Parcelas:</label>
-        <input type="number" id="parcelas" min="1" max="12" required inputmode="numeric" oninput="habilitarBotao()">
-        
-        <button type="button" id="calcularBtn" onclick="calcularEmprestimo()" disabled>Calcular</button>
+        <input type="number" id="parcelas" min="1" max="12" required inputmode="numeric">
+
+        <button type="button" onclick="calcularEmprestimo()">Calcular</button>
     </form>
 
     <h2 id="resultado"></h2>
+
+    <footer>
+        <p>© 2025 Calculadora de Empréstimos. Todos os direitos reservados.</p>
+    </footer>
 
     <script>
         function formatarMoeda(input) {
@@ -94,18 +122,6 @@
             }
             let numero = parseFloat(valor) / 100;
             input.value = numero.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
-        }
-
-        function habilitarBotao() {
-            var valorTexto = document.getElementById("valor").value;
-            var numParcelas = document.getElementById("parcelas").value;
-            var calcularBtn = document.getElementById("calcularBtn");
-            
-            if (valorTexto !== "" && numParcelas >= 1 && numParcelas <= 12) {
-                calcularBtn.disabled = false;
-            } else {
-                calcularBtn.disabled = true;
-            }
         }
 
         function calcularEmprestimo() {
@@ -143,7 +159,7 @@
 
             resultado.innerHTML = "Valor Total no Cartão: " + valorTotalFormatado + "<br>" +
                 "Valor da Parcela: " + valorParcelaFormatado;
-            resultado.className = ""; 
+            resultado.className = "sucesso"; 
         }
     </script>
 </body>
