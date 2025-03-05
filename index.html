@@ -6,26 +6,92 @@
     <title>Calculadora de Empréstimo</title>
     <style>
         body {
-            font-family: Arial, sans-serif;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f4f7fa;
+            color: #333;
             text-align: center;
-            margin-top: 50px;
+            margin: 0;
+            padding: 0;
         }
+
+        h1 {
+            font-size: 2.5em;
+            margin: 30px;
+            color: #2d6a4f;
+        }
+
         form {
-            margin-bottom: 20px;
+            background-color: #ffffff;
+            border-radius: 10px;
+            padding: 30px;
+            width: 80%;
+            max-width: 600px;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+            margin: 0 auto;
         }
-        input, button {
-            padding: 10px;
-            margin: 5px;
+
+        label {
+            font-size: 1.2em;
+            margin: 10px 0;
+            display: block;
         }
+
+        input[type="text"], input[type="number"] {
+            font-size: 1em;
+            padding: 12px;
+            width: 100%;
+            border: 2px solid #ddd;
+            border-radius: 5px;
+            margin: 10px 0;
+            box-sizing: border-box;
+            transition: border-color 0.3s ease;
+        }
+
+        input[type="text"]:focus, input[type="number"]:focus {
+            border-color: #2d6a4f;
+            outline: none;
+        }
+
         button {
-            font-size: 18px;  /* Aumenta o tamanho da fonte do botão */
-            padding: 15px 30px;  /* Aumenta o tamanho do botão */
+            background-color: #2d6a4f;
+            color: #fff;
+            border: none;
+            padding: 15px 30px;
+            font-size: 1.2em;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
         }
+
+        button:hover {
+            background-color: #218c47;
+        }
+
         h2 {
-            color: green;
+            font-size: 1.5em;
+            color: #333;
+            margin-top: 20px;
         }
+
         .erro {
             color: red;
+            font-size: 1.2em;
+        }
+
+        .sucesso {
+            color: #2d6a4f;
+            font-size: 1.5em;
+            font-weight: bold;
+        }
+
+        footer {
+            position: absolute;
+            bottom: 0;
+            width: 100%;
+            text-align: center;
+            padding: 10px;
+            background-color: #2d6a4f;
+            color: white;
         }
     </style>
 </head>
@@ -34,14 +100,18 @@
     <form id="form">
         <label for="valor">Valor do Pix (R$):</label>
         <input type="text" id="valor" required oninput="formatarMoeda(this)" inputmode="decimal">
-        <br><br>
+        
         <label for="parcelas">Número de Parcelas:</label>
         <input type="number" id="parcelas" min="1" max="12" required inputmode="numeric">
-        <br><br>
+
         <button type="button" onclick="calcularEmprestimo()">Calcular</button>
     </form>
 
     <h2 id="resultado"></h2>
+
+    <footer>
+        <p>© 2025 Calculadora de Empréstimos. Todos os direitos reservados.</p>
+    </footer>
 
     <script>
         function formatarMoeda(input) {
@@ -89,7 +159,7 @@
 
             resultado.innerHTML = "Valor Total no Cartão: " + valorTotalFormatado + "<br>" +
                 "Valor da Parcela: " + valorParcelaFormatado;
-            resultado.className = ""; 
+            resultado.className = "sucesso"; 
         }
     </script>
 </body>
