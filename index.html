@@ -136,6 +136,12 @@
                 return;
             }
 
+            if (valorNumerico < 100) {  
+                resultado.innerText = "Erro: O Valor mínimo do PIX deverá ser de 100 Reais";
+                resultado.className = "erro"; 
+                return;
+            }
+
             if (numParcelas > 12) {
                 resultado.innerText = "Erro: O número máximo de parcelas é 12.";
                 resultado.className = "erro"; 
@@ -153,6 +159,12 @@
 
             var valorTotal = valorComJuros;
             var valorParcela = valorTotal / numParcelas;
+
+            if (valorParcela < 10) {
+                resultado.innerText = "O Valor Mínimo da Parcela deve ser de 10 Reais";
+                resultado.className = "erro"; 
+                return;
+            }
 
             var valorTotalFormatado = valorTotal.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
             var valorParcelaFormatado = valorParcela.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
